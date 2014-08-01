@@ -1,0 +1,23 @@
+{% extends 'events/base.html' %}
+{% load staticfiles sekizai_tags crispy_forms_tags %}
+
+{% block content %}
+
+  <a href="{% url 'events:list' %}" class="btn btn-default">Back</a>
+
+  {% crispy form %}
+
+{% addtoblock 'css' %}
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datetimepicker.min.css' %}"
+{% endaddtoblock %}
+
+{% addtoblock 'js' %}
+  <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+  <script>
+    $('#id_datetime').datetimepicker(
+      {format: 'yyyy-mm-dd hh:ii'}
+    );
+  </script>
+{% endaddtoblock %}
+
+{% endblock %}

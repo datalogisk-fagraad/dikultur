@@ -1,0 +1,11 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+  <a href="{% url 'events:list' %}" class="btn btn-default">Back</a>
+
+  <h2>{{ event.title }}</h2>
+
+  <p>{{ event.description }}</p>
+
+{% endblock %}
