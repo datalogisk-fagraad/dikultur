@@ -1,0 +1,7 @@
+git+https://github.com/django/django@stable/1.7.x#egg=Django
+django-allauth==0.17.0
+django-crispy-forms==1.4.0
+django-environ==0.3.0
+django-sekizai==0.7
+psycopg2==2.5.3
+Markdown==2.4.1
