@@ -2,9 +2,35 @@
 
 {% block content %}
 
-  {% for event in events %}
-    <a href="{% url 'events:detail' event.slug %}">{{ event.title }} at {{ event.datetime }}<br /><br />
-  {% endfor %}
+  <table class="table table-striped table-hover">
 
-  <a href="{% url 'events:create' %}">New event</a>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Place</th>
+        <th>When?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+    {% for event in events %}
+      <tr>
+        <td>
+          <a href="{% url 'events:detail' event.slug %}">{{ event.title }}</a>
+        </td>
+        <td>
+          {{ event.place }}
+        </td>
+        <td>
+          {{ event.datetime }}
+        </td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+
+  </table>
+
+  <a href="{% url 'events:create' %}" class="btn btn-primary">New event</a>
 {% endblock %}
