@@ -2,6 +2,13 @@
 
 A simple django project for events at DIKU.
 
+## Requirements
+
+- Python 3
+- Django 1.7
+
+See ``requirements.txt`` for other requirements.
+
 ## Quick setup
 
 0. Create virtualenv
