@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth import models as auth_models
 from django.utils.text import slugify
 
 
@@ -13,6 +15,9 @@ class Event(models.Model):
     place = models.CharField(max_length=255)
     datetime = models.DateTimeField()
     description = models.TextField()
+
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    group = models.ForeignKey(auth_models.Group, null=True, blank=True)
 
     class Meta:
         verbose_name = 'event'
@@ -32,3 +37,19 @@ class Event(models.Model):
             self.slug = slugify(self.title)
 
         super().save(force_insert, force_update, using, update_fields)
+
+
+class GroupDetail(models.Model):
+    group = models.OneToOneField(auth_models.Group)
+    description = models.TextField()
+    url = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.group
+
+
+class User(auth_models.AbstractUser):
+    """
+    Placeholder so migrations won't break if a custom user is needed.
+    """
+    pass

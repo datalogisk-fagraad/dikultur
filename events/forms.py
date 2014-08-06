@@ -8,11 +8,12 @@ from . import models
 
 
 class EventForm(forms.ModelForm):
+
     class Meta:
         model = models.Event
-        fields = ('title', 'place', 'datetime', 'description')
+        exclude = ['created_at', 'updated_at', 'slug', 'owner']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
@@ -21,11 +22,25 @@ class EventForm(forms.ModelForm):
         self.helper.field_class = 'col-sm-10'
         self.helper.form_method = 'POST'
 
-        self.helper.layout = Layout(
+        field_list = [
             'title', 'place', 'datetime', 'description',
+        ]
+
+        if user:
+            groups = user.groups.all()
+            if len(groups) > 0:
+                self.fields['group'] = forms.ModelChoiceField(
+                    queryset=groups
+                )
+                field_list.append('group')
+
+        field_list.append(
             Div(
-                StrictButton('Create', type='submit', css_class='btn-primary'),
+                StrictButton('Save', type='submit', css_class='btn-primary'),
                 css_class="text-right"
             )
         )
 
+        self.helper.layout = Layout(
+            *field_list
+        )

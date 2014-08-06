@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='event',
-            name='slug',
-            field=models.CharField(null=True, blank=True, max_length=255),
+            name='group',
+            field=models.ForeignKey(blank=True, null=True, to='auth.Group'),
         ),
     ]

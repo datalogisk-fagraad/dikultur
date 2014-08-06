@@ -32,5 +32,8 @@
 
   </table>
 
+  {% if user.is_authenticated %}
   <a href="{% url 'events:create' %}" class="btn btn-primary">New event</a>
+  {% endif %}
+
 {% endblock %}
