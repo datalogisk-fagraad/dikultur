@@ -12,7 +12,7 @@ DEBUG = env('DEBUG')
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
-AUTH_USER_MODEL = 'events.User'
+AUTH_USER_MODEL = 'core.User'
 
 SITE_ID = 1
 
@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'sekizai',
 
+    'core',
     'events',
 )
 
