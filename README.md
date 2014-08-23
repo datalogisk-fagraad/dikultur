@@ -1,6 +1,6 @@
-# DIKU Events
+# dikultur
 
-A simple django project for events at DIKU.
+"Portal" for gathering study resources, events and other stuff at DIKU.
 
 ## Requirements
 
@@ -17,4 +17,3 @@ See ``requirements.txt`` for other requirements.
 3. Run server: ./manage.py runserver
 
 Of course deploying to production is a bit more complicated (but not much).
-

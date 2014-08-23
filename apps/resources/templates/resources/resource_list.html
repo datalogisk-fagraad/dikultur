@@ -1,0 +1,12 @@
+{% extends 'resources/base.html' %}
+
+{% block content %}
+
+  {% for resource in resources %}
+
+    <a href="{% url 'resources:detail' resource.slug %}">{{ resource }}</a><br />
+
+  {% endfor %}
+
+
+{% endblock %}

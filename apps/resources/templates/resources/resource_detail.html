@@ -1,0 +1,11 @@
+{% extends 'resources/base.html' %}
+
+{% block content %}
+
+  <h2>{{ resource }}</h2>
+
+  {% for file in resource.files.all %}
+    <a href="{{ file.file.url }}">{{ file }}</a>
+  {% endfor %}
+
+{% endblock %}
