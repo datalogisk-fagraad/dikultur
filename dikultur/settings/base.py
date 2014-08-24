@@ -47,6 +47,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
+    "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     'sekizai.context_processors.sekizai',
     "allauth.account.context_processors.account",
@@ -92,3 +93,6 @@ TEMPLATE_DIRS = (
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
