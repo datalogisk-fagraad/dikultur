@@ -1,5 +1,6 @@
 *.sw*
 .idea
 *.pyc
+.env
 db.sqlite3
 media/
