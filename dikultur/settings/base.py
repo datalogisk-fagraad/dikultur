@@ -28,7 +28,6 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.bitbucket',
     'allauth.socialaccount.providers.github',
 
     'crispy_forms',
