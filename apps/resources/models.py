@@ -12,7 +12,7 @@ class Resource(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
     description = models.TextField()
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     class Meta:
         verbose_name = 'resource'

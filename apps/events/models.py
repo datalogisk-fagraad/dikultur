@@ -21,7 +21,7 @@ class Event(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
     group = models.ForeignKey(auth_models.Group, null=True, blank=True)
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     class Meta:
         verbose_name = 'event'
