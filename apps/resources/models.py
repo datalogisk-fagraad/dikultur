@@ -40,3 +40,7 @@ class ResourceLink(models.Model):
     resource = models.ForeignKey('Resource', related_name='links')
     title = models.CharField(max_length=255)
     url = models.URLField()
+
+    class Meta:
+        verbose_name = 'resource link'
+        verbose_name_plural = 'resource links'
