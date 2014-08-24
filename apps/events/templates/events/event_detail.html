@@ -3,15 +3,27 @@
 
 {% block content %}
 
+  {% if event.public or user == event.owner %}
+
   <div class="row-fluid">
 
     <div class="col-md-8">
+
+      {% if not event.public %}
+        <p class="alert alert-danger" style="font-size: 18px">
+            <i class="fa fa-exclamation-circle fa-2x" style="vertical-align: middle"></i>
+            This event is not public! Go update the event to make it public.
+        </p>
+      {% endif %}
+
       <div class="page-header" style="margin-top: 0px">
         <h1 style="margin-top: 0px">
           {{ event.title }}
         </h1>
       </div>
+
       <p>{{ event.description|markdown }}</p>
+
     </div>
 
     <div class="col-md-4">
@@ -52,6 +64,16 @@
 
           <div class="panel-body">
             <p>This is your event.</p>
+
+            <p>
+              <strong>Status:</strong>
+              {% if event.public %}
+                Public
+              {% else %}
+                Not public
+              {% endif %}
+            </p>
+
             <a href="{% url 'events:update' event.slug %}" class="btn btn-primary">Update</a>
           </div>
         </div>
@@ -60,8 +82,7 @@
     </div>
 
   </div>
-
-
-
-
+  {% else %}
+    Nothing to see here!
+  {% endif %}
 {% endblock %}
