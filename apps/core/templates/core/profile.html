@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
-{% load account %}
+{% load account events_tags %}
 
 {% block content %}
 
-  <h2>{% user_display user %}</h2>
+  <div class="page-header" style="margin-top: 0px">
+    <h1 style="margin-top: 0px">
+      Profile page for {% user_display user %}
+    </h1>
+  </div>
+
+  <h3>My events</h3>
+  {% event_list user.event_set.all profile_view=True %}
+  <a href="{% url 'events:create' %}" class="btn btn-primary">New event</a>
 
 {% endblock %}
