@@ -1,4 +1,4 @@
-{% load staticfiles sekizai_tags socialaccount %}
+{% load staticfiles sekizai_tags account socialaccount %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -27,12 +27,26 @@
         <li><a href="{% url 'resources:list' %}">Resources</a></li>
         <li><a href="{% url 'events:list' %}">Events</a></li>
       </ul>
-      <div class="navbar-form navbar-right">
-        Login with:
-        <a class="btn btn-primary" href="{% provider_login_url 'github'%}">
-          <i class="fa fa-github" style="font-size: 18px"></i> Github
-        </a>
-      </div>
+
+      <ul class="nav navbar-nav navbar-right ">
+        {% if user.is_authenticated %}
+          <li>
+            <a href="{% url 'profile' %}"><i class="fa fa-user" style="font-size: 18px"></i> {% user_display user %}</a>
+          </li>
+          <li>
+            <a href="{% url 'account_logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <p class="navbar-text">
+            Login with:
+          </p>
+          <li>
+          <a href="{% provider_login_url 'github'%}">
+            <i class="fa fa-github" style="font-size: 18px"></i> Github
+          </a>
+          </li>
+        {% endif %}
+      </ul>
     </div>
     <!--/.nav-collapse -->
   </div>
