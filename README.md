@@ -13,7 +13,8 @@ See ``requirements.txt`` for other requirements.
 
 0. Create virtualenv
 1. Install requirements: pip install -r requirements.txt
-2. Run migrate: ./manage.py migrate
-3. Run server: ./manage.py runserver
+2. Set environment variables (database, smtp etc.) in dikultur/settings/.env
+3. Run migrate: ./manage.py migrate
+4. Run server: ./manage.py runserver
 
 Of course deploying to production is a bit more complicated (but not much).
