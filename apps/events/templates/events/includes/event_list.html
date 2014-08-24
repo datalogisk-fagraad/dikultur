@@ -1,0 +1,43 @@
+<table class="table table-striped table-hover">
+
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Place</th>
+    <th>When?</th>
+    {% if profile_view %}
+    <th>Status</th>
+    {% endif %}
+  </tr>
+  </thead>
+
+  <tbody>
+
+  {% for event in events %}
+    <tr>
+      <td>
+        <a href="{% url 'events:detail' event.slug %}">{{ event.title }}</a>
+      </td>
+      <td>
+        {{ event.place }}
+      </td>
+      <td>
+        {{ event.datetime }}
+      </td>
+
+      {% if profile_view %}
+      <td>
+        {% if event.public %}
+          Public
+        {% else %}
+          Not public
+        {% endif %}
+      </td>
+      {% endif %}
+
+    </tr>
+  {% endfor %}
+
+  </tbody>
+
+</table>
