@@ -23,6 +23,8 @@ class Event(models.Model):
 
     tags = TaggableManager(blank=True)
 
+    public = models.BooleanField(default=False)
+
     class Meta:
         verbose_name = 'event'
         verbose_name_plural = 'events'

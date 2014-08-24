@@ -23,7 +23,7 @@ class EventForm(forms.ModelForm):
         self.helper.form_method = 'POST'
 
         field_list = [
-            'title', 'place', 'datetime', 'description', 'tags'
+            'title', 'place', 'datetime', 'description', 'tags', 'public'
         ]
 
         if user:
