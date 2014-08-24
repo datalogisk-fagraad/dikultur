@@ -17,5 +17,5 @@ def convert_http_to_markdown_link(value):
 @register.filter()
 def markdown(value):
     value = convert_http_to_markdown_link(value)
-    md = Markdown(safe_mode='escape')
+    md = Markdown(safe_mode='escape', extensions=['sane_lists'])
     return mark_safe(md.convert(value))
