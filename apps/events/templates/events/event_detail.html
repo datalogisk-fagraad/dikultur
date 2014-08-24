@@ -1,21 +1,67 @@
 {% extends 'events/base.html' %}
+{% load markdown %}
 
 {% block content %}
 
-  <a href="{% url 'events:list' %}" class="btn btn-default">Back</a>
+  <div class="row-fluid">
 
-  <h2>{{ event.title }}</h2>
+    <div class="col-md-8">
+      <div class="page-header" style="margin-top: 0px">
+        <h1 style="margin-top: 0px">
+          {{ event.title }}
+        </h1>
+      </div>
+      <p>{{ event.description|markdown }}</p>
+    </div>
 
-  {% if event.group %}
-    <small>Group: {{ event.group }}</small>
-  {% endif %}
+    <div class="col-md-4">
 
-  <hr />
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Date:
+        </div>
 
-  <p>{{ event.description }}</p>
+        <div class="panel-body">
+          {{ event.datetime }}
+        </div>
+      </div>
 
-  {% if user.is_authenticated and event.owner == user %}
-    <a href="{% url 'events:update' event.slug %}" class="btn btn-primary">Update</a>
-  {% endif %}
+      {% if event.tags.count > 0 %}
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            Tags:
+          </div>
+
+          <div class="panel-body">
+            {% for tag in event.tags.all %}
+              <span class="label label-info">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if event.group %}
+        <small>Group: {{ event.group }}</small>
+      {% endif %}
+
+      {% if user.is_authenticated and event.owner == user %}
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            Actions
+          </div>
+
+          <div class="panel-body">
+            <p>This is your event.</p>
+            <a href="{% url 'events:update' event.slug %}" class="btn btn-primary">Update</a>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+
+
 
 {% endblock %}
