@@ -7,7 +7,7 @@
 
   <div class="row-fluid">
 
-    <div class="col-md-8">
+    <div class="col-sm-8">
 
       {% if not event.public %}
         <p class="alert alert-danger" style="font-size: 18px">
@@ -26,7 +26,7 @@
 
     </div>
 
-    <div class="col-md-4">
+    <div class="col-sm-4">
 
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -34,7 +34,7 @@
         </div>
 
         <div class="panel-body">
-          {{ event.datetime }}
+          {{ event.datetime|date:'DATETIME_FORMAT' }}
         </div>
       </div>
 
