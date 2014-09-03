@@ -1,4 +1,4 @@
-git+https://github.com/django/django@stable/1.7.x#egg=Django
+django==1.7
 django-allauth==0.17.0
 #django-crispy-forms==1.4.0
 git+https://github.com/maraujop/django-crispy-forms@dev#egg=django-crispy-forms
