@@ -25,6 +25,36 @@ class Resource(models.Model):
     def __str__(self):
         return self.title
 
+    def upvote(self, user):
+        """
+        Raises IntegrityError if user has already upvoted resource
+        :param user:
+        """
+        try:
+            self.resourceupvote_set.create(user=user, resource=self)
+        except ResourceUpvote.DoesNotExist:
+            pass
+
+    def remove_upvote(self, user):
+        try:
+            upvote = self.resourceupvote_set.get(user=user, resource=self)
+            upvote.delete()
+        except ResourceUpvote.DoesNotExist:
+            pass
+
+
+    @property
+    def upvotes(self):
+        return self.resourceupvote_set.count()
+
+
+class ResourceUpvote(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    resource = models.ForeignKey('Resource')
+
+    class Meta:
+        unique_together = ('user', 'resource')
+
 
 class ResourceFile(models.Model):
     resource = models.ForeignKey('Resource', related_name='files')

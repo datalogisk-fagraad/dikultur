@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Resource, ResourceFile, ResourceLink
+from .models import Resource, ResourceFile, ResourceLink, ResourceUpvote
 
 
 class ResourceFileInline(admin.TabularInline):
@@ -19,3 +19,4 @@ class ResourceAdmin(admin.ModelAdmin):
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(ResourceFile)
 admin.site.register(ResourceLink)
+admin.site.register(ResourceUpvote)

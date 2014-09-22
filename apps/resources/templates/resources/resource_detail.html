@@ -1,11 +1,76 @@
 {% extends 'resources/base.html' %}
+{% load sekizai_tags %}
 
 {% block content %}
 
   <h2>{{ resource }}</h2>
 
+  <div>
+
+    {% if user.is_authenticated %}
+    <span id="upvote-area"></span>
+    {% endif %}
+
+    <span class="">
+      Score:
+      <span id="upvotes">{{ resource.upvotes }}</span>
+    </span>
+
+  </div>
+
   {% for file in resource.files.all %}
     <a href="{{ file.file.url }}">{{ file }}</a>
   {% endfor %}
+
+  {% addtoblock 'js' %}
+    {% if user.is_authenticated %}
+    <script>
+    $(function() {
+      var url = window.location;
+
+      var upvote_button = $('<button class="btn">')
+                          .append('<i class="fa fa-thumbs-up">');
+
+      var remove_upvote_button = $('<button class="btn">')
+                                 .append('<i class="fa fa-thumbs-down">');
+
+      var upvote_area = $('#upvote-area');
+      var upvotes = $('#upvotes');
+
+      upvote_area.append(upvote_button).append(remove_upvote_button);
+
+      {% if has_liked %}
+        upvote_button.hide();
+      {% else %}
+        remove_upvote_button.hide();
+      {% endif %}
+
+      upvote_button.click(function() {
+        $.ajax({
+          type: 'POST',
+          url: url + '/upvote',
+          success: function(result) {
+            remove_upvote_button.show();
+            upvote_button.hide();
+            upvotes.html(result);
+          }
+        });
+      });
+
+      remove_upvote_button.click(function() {
+        $.ajax({
+          type: 'POST',
+          url: url + '/remove_upvote',
+          success: function(result) {
+            remove_upvote_button.hide();
+            upvote_button.show();
+            upvotes.html(result);
+          },
+        });
+      });
+    });
+    </script>
+    {% endif %}
+  {% endaddtoblock %}
 
 {% endblock %}
