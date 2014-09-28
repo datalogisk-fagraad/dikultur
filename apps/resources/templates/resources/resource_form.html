@@ -1,0 +1,35 @@
+{% extends 'resources/base.html' %}
+{% load staticfiles sekizai_tags crispy_forms_tags %}
+
+{% block content %}
+
+  <a href="
+  {% if resource %}
+  {% url 'resources:detail' resource.slug %}
+  {% else %}
+  {% url 'resources:list' %}
+  {% endif %}
+  " class="btn btn-default">Back</a>
+
+  <form class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{ form|crispy }}
+    <input type="file" name="resourcefile"/>
+    <span id="one-more-file" class="btn btn-default">
+      <i class="fa fa-plus-circle"></i>
+    </span>
+    <div class="text-right">
+        <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+  </form>
+
+  {% addtoblock 'js' %}
+    <script>
+      $(function() {
+        $('#one-more-file').click(function() {
+          $(this).before('<input type="file" name="resourcefile" />');
+        });
+      });
+    </script>
+  {% endaddtoblock %}
+
+{% endblock %}

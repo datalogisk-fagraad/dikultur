@@ -1,12 +1,11 @@
 {% extends 'resources/base.html' %}
-{% load sekizai_tags %}
+{% load sekizai_tags markdown %}
 
 {% block content %}
 
   <h2>{{ resource }}</h2>
 
   <div>
-
     {% if user.is_authenticated %}
     <span id="upvote-area"></span>
     {% endif %}
@@ -15,12 +14,21 @@
       Score:
       <span id="upvotes">{{ resource.upvotes }}</span>
     </span>
-
   </div>
 
-  {% for file in resource.files.all %}
-    <a href="{{ file.file.url }}">{{ file }}</a>
-  {% endfor %}
+  <hr />
+
+  {{ resource.description|markdown }}
+
+  <ul>
+    {% for file in resource.files.all %}
+      <li><a href="{{ file.file.url }}">{{ file.filename }}</a></li>
+    {% endfor %}
+  </ul>
+
+  {% if user.is_authenticated and resource.owner == user %}
+    <a href="{% url 'resources:update' resource.slug %}" class="btn btn-primary">Update</a>
+  {% endif %}
 
   {% addtoblock 'js' %}
     {% if user.is_authenticated %}

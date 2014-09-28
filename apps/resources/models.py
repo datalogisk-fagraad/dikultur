@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-
 from django_extensions.db.fields import AutoSlugField
 
 from taggit.managers import TaggableManager
@@ -42,7 +41,6 @@ class Resource(models.Model):
         except ResourceUpvote.DoesNotExist:
             pass
 
-
     @property
     def upvotes(self):
         return self.resourceupvote_set.count()
@@ -58,12 +56,15 @@ class ResourceUpvote(models.Model):
 
 class ResourceFile(models.Model):
     resource = models.ForeignKey('Resource', related_name='files')
-    title = models.CharField(max_length=255)
     file = models.FileField(upload_to='resources')
 
     class Meta:
         verbose_name = 'resource file'
         verbose_name_plural = 'resource files'
+
+    @property
+    def filename(self):
+        return self.file.name.split('/')[-1]
 
 
 class ResourceLink(models.Model):

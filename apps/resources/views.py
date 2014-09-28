@@ -1,10 +1,13 @@
 from django.db import IntegrityError
-from django.http import HttpResponse
-from django.views.generic import ListView, DetailView, View
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import ListView, DetailView, View, CreateView, \
+    UpdateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-from . import models
+from ..core.views.mixins import LoginRequiredMixin
+
+from . import models, forms
 
 
 class ResourceList(ListView):
@@ -59,3 +62,31 @@ def resource_remove_upvote(request, **kwargs):
     resource = models.Resource.objects.get(slug=slug)
     resource.remove_upvote(request.user)
     return HttpResponse(content=resource.upvotes, status=200)
+
+
+class ResourceCreate(LoginRequiredMixin, CreateView):
+    template_name = 'resources/resource_form.html'
+    model = models.Resource
+    form_class = forms.ResourceForm
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        resource = form.save()
+
+        for file in self.request.FILES.getlist('resourcefile'):
+            models.ResourceFile.objects.create(resource=resource, file=file)
+
+        return HttpResponseRedirect(resource.get_absolute_url())
+
+
+class ResourceUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'resources/resource_form.html'
+    model = models.Resource
+    form_class = forms.ResourceForm
+
+    def form_valid(self, form):
+        resource = form.save()
+        for file in self.request.FILES.getlist('resourcefile'):
+            models.ResourceFile.objects.create(resource=resource, file=file)
+
+        return HttpResponseRedirect(resource.get_absolute_url())

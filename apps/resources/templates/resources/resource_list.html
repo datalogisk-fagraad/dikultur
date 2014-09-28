@@ -1,12 +1,15 @@
 {% extends 'resources/base.html' %}
+{% load resources_tags %}
 
 {% block content %}
 
-  {% for resource in resources %}
+  {% resource_list resources %}
 
-    <a href="{% url 'resources:detail' resource.slug %}">{{ resource }}</a><br />
+  <hr />
 
-  {% endfor %}
+  {% if user.is_authenticated %}
+    <a href="{% url 'resources:create' %}" class="btn btn-primary">New resource</a>
+  {% endif %}
 
 
 {% endblock %}

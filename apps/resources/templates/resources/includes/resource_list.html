@@ -1,0 +1,25 @@
+<table class="table table-striped table-hover">
+
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Votes</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  {% for resource in resources %}
+    <tr>
+      <td>
+        <a href="{% url 'resources:detail' resource.slug %}">{{ resource.title }}</a>
+      </td>
+      <td>
+        {{ resource.upvotes }}
+      </td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+
+</table>
