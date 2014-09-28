@@ -1,8 +1,9 @@
 import re
 
 from django import template
-from markdown import Markdown
 from django.utils.safestring import mark_safe
+import CommonMark
+
 
 register = template.Library()
 
@@ -17,5 +18,10 @@ def convert_http_to_markdown_link(value):
 @register.filter()
 def markdown(value):
     value = convert_http_to_markdown_link(value)
-    md = Markdown(safe_mode='escape', extensions=['sane_lists'])
-    return mark_safe(md.convert(value))
+
+    parser = CommonMark.DocParser()
+    renderer = CommonMark.HTMLRenderer()
+    ast = parser.parse(value)
+    html = renderer.render(ast)
+
+    return mark_safe(html)
