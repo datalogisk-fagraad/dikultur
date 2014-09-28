@@ -3,7 +3,13 @@
 
 {% block content %}
 
-  <a href="{% url 'events:list' %}" class="btn btn-default">Back</a>
+  <a href="
+  {% if event %}
+  {% url 'events:detail' event.slug %}
+  {% else %}
+  {% url 'events:list' %}
+  {% endif %}
+  " class="btn btn-default">Back</a>
 
   {% crispy form %}
 
