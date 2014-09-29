@@ -13,7 +13,34 @@
 
   <form class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
     {{ form|crispy }}
-    <input type="file" name="resourcefile"/>
+
+    <table id="files" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if resource %}
+        {% for file in resource.files.all %}
+        <tr>
+          <td>
+            {{ file.filename }}
+          </td>
+          <td>
+            {{ file.file.size }}
+          </td>
+          <td>
+            <span class="btn btn-default uploaded-file" data-pk="{{ file.pk }}"><i class="fa fa-times"></i></span>
+          </td>
+        </tr>
+        {% endfor %}
+      {% endif %}
+      </tbody>
+    </table>
+
     <span id="one-more-file" class="btn btn-default">
       <i class="fa fa-plus-circle"></i>
     </span>
@@ -25,8 +52,48 @@
   {% addtoblock 'js' %}
     <script>
       $(function() {
+        var files = $('#files tbody');
         $('#one-more-file').click(function() {
-          $(this).before('<input type="file" name="resourcefile" />');
+          var file = $('<input type="file" name="resourcefile" />');
+          $(this).before(file);
+          file.hide();
+          file.click();
+          file.on('change', function() {
+
+            var size = this.files[0].size;
+            var size_string;
+
+            if(size > 1000000) {
+              size_string = (size / 1024 / 1024).toFixed() + "MB";
+            } else if(size > 1000) {
+              size_string = (size / 1024).toFixed() + "KB";
+            }
+
+            var label = '<td>' + $(this).val() + '</td>';
+            var size_label = '<td>' + size_string + '</td>';
+            var remove = $('<td><span class="btn btn-default"><i class="fa fa-times"></i></span></td>');
+            var line = $('<tr>').append(label).append(size_label).append(remove);
+            files.append(line);
+            remove.click(function() {
+              line.remove();
+              file.remove();
+            });
+          });
+        });
+
+        $('.uploaded-file').click(function () {
+          var tr = $(this).parents('tr');
+          var confirmation = confirm("Do you really wish to delete this file?");
+          if(confirmation) {
+            $.ajax({
+              type: 'POST',
+              data: {pk: $(this).data('pk')},
+              url: window.location + '/delete-file',
+              success: function() {
+                tr.remove();
+              }
+            });
+          }
         });
       });
     </script>

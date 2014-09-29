@@ -1,9 +1,10 @@
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import ListView, DetailView, View, CreateView, \
+from django.views.generic import ListView, DetailView, CreateView, \
     UpdateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 from ..core.views.mixins import LoginRequiredMixin
 
@@ -41,6 +42,7 @@ class ResourceDetail(DetailView):
         return context
 
 
+@login_required
 @csrf_exempt
 def resource_upvote(request, **kwargs):
     slug = kwargs.get('slug', None)
@@ -56,6 +58,7 @@ def resource_upvote(request, **kwargs):
     return HttpResponse(content=resource.upvotes, status=200)
 
 
+@login_required
 @csrf_exempt
 def resource_remove_upvote(request, **kwargs):
     slug = kwargs.get('slug', None)
@@ -90,3 +93,17 @@ class ResourceUpdate(LoginRequiredMixin, UpdateView):
             models.ResourceFile.objects.create(resource=resource, file=file)
 
         return HttpResponseRedirect(resource.get_absolute_url())
+
+
+@login_required
+@csrf_exempt
+def resource_file_delete(request, **kwargs):
+    pk = request.POST.get('pk', None)
+
+    if pk:
+        file = models.ResourceFile.objects.get(pk=pk)
+        file.delete()
+        return HttpResponse(status=200)
+
+    # Something went wrong
+    return HttpResponse(status=500)

@@ -62,7 +62,7 @@ class ResourceFile(models.Model):
         verbose_name = 'resource file'
         verbose_name_plural = 'resource files'
 
-    @property
+
     def filename(self):
         return self.file.name.split('/')[-1]
 
