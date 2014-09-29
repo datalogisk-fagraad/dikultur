@@ -28,6 +28,16 @@
 
     <div class="col-sm-4">
 
+      {% if event.group %}
+        <div class="panel panel-danger">
+          <div class="panel-body">
+            <h4>
+              by <a href="{% url 'groups:detail' event.group.slug %}">{{ event.group }}</a>
+            </h4>
+          </div>
+        </div>
+      {% endif %}
+
       <div class="panel panel-primary">
         <div class="panel-heading">
           Date:
@@ -50,10 +60,6 @@
             {% endfor %}
           </div>
         </div>
-      {% endif %}
-
-      {% if event.group %}
-        <small>Group: {{ event.group }}</small>
       {% endif %}
 
       {% if user.is_authenticated and event.owner == user %}

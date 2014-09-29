@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'sekizai',
     'taggit',
 
+    'apps.groups',
     'apps.core',
     'apps.resources',
     'apps.events',

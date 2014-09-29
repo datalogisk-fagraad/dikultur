@@ -23,16 +23,16 @@ class EventForm(forms.ModelForm):
         self.helper.form_method = 'POST'
 
         field_list = [
-            'title', 'place', 'datetime', 'description', 'tags', 'public'
+            'title', 'place', 'datetime', 'description', 'tags',
         ]
 
         if user:
-            groups = user.groups.all()
-            if len(groups) > 0:
-                self.fields['group'] = forms.ModelChoiceField(
-                    queryset=groups
-                )
-                field_list.append('group')
+            self.fields['group'] = forms.ModelChoiceField(
+                queryset=user.group_set.all(),
+            )
+            field_list.append('group')
+
+        field_list.append('public')
 
         field_list.append(
             Div(

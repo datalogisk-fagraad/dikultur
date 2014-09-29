@@ -19,6 +19,10 @@ urlpatterns = patterns(
                              namespace='events',
                              app_name='events')),
 
+    url(r'^groups/', include('apps.groups.urls',
+                             namespace='groups',
+                             app_name='groups')),
+
     url(r'^$', FrontPage.as_view(), name='frontpage'),
 )
 

@@ -7,6 +7,7 @@ from django.utils import timezone
 import icalendar
 
 from . import models, forms
+from apps.events.utils import generate_ical
 
 
 class EventList(ListView):
@@ -48,13 +49,15 @@ class EventUpdate(UpdateView):
     model = models.Event
     form_class = forms.EventForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 
 class CalendarFeed(View):
     def get(self, *args):
-        cal = icalendar.Calendar()
-        for event in models.Event.objects.all():
-            if event.ical and event.public:
-                event_ical = icalendar.Event.from_ical(event.ical)
-                cal.add_component(event_ical)
+
+        cal = generate_ical()
 
         return HttpResponse(content=cal.to_ical())

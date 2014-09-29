@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django_extensions.db.fields import AutoSlugField
 
+from apps.groups.models import Group
+
 import icalendar
 
 from taggit.managers import TaggableManager
@@ -21,7 +23,7 @@ class Event(models.Model):
     description = models.TextField()
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
-    group = models.ForeignKey(auth_models.Group, null=True, blank=True)
+    group = models.ForeignKey(Group, null=True, blank=True)
 
     tags = TaggableManager(blank=True)
 

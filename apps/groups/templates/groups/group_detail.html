@@ -1,0 +1,24 @@
+{% extends 'events/base.html' %}
+{% load markdown events_tags %}
+
+{% block content %}
+  <h1>{{ group.name }}</h1>
+  <hr />
+
+  {{ group.description|markdown }}
+
+  <hr />
+
+  <h3>
+    Upcoming events by {{ group.name }}
+    <small class="pull-right">
+      iCal feed:
+      <a href="{% url 'groups:ical' group.slug %}">
+        {% url 'groups:ical' group.slug %}
+      </a>
+    </small>
+  </h3>
+
+  {% event_list future_events %}
+
+{% endblock %}
