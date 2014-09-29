@@ -10,8 +10,9 @@
   {% url 'resources:list' %}
   {% endif %}
   " class="btn btn-default">Back</a>
+  <hr />
 
-  <form class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
+  <form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
     {{ form|crispy }}
 
     <table id="files" class="table table-bordered">
