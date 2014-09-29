@@ -1,4 +1,8 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.http import HttpResponse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
+    View
+
+import icalendar
 
 from . import models, forms
 
@@ -34,3 +38,14 @@ class EventUpdate(UpdateView):
     template_name = 'events/event_form.html'
     model = models.Event
     form_class = forms.EventForm
+
+
+class CalendarFeed(View):
+    def get(self, *args):
+        cal = icalendar.Calendar()
+        for event in models.Event.objects.all():
+            if event.ical and event.public:
+                event_ical = icalendar.Event.from_ical(event.ical)
+                cal.add_component(event_ical)
+
+        return HttpResponse(content=cal.to_ical())

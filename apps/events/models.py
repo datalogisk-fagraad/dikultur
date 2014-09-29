@@ -3,6 +3,8 @@ from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django_extensions.db.fields import AutoSlugField
 
+import icalendar
+
 from taggit.managers import TaggableManager
 
 
@@ -25,6 +27,8 @@ class Event(models.Model):
 
     public = models.BooleanField(default=False)
 
+    ical = models.TextField(null=True, blank=True)
+
     class Meta:
         verbose_name = 'event'
         verbose_name_plural = 'events'
@@ -35,3 +39,11 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, **kwargs):
+        event = icalendar.Event()
+        event.add('dtstart', self.datetime)
+        event.add('summary', self.title)
+        event.add('description', self.get_absolute_url())
+        self.ical = event.to_ical()
+        super().save(**kwargs)

@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 from . import views
 
 urlpatterns = patterns('',
+    url(r'^calendar$', views.CalendarFeed.as_view(), name='calendar'),
     url(r'^create$', views.EventCreate.as_view(), name='create'),
     url(r'^(?P<slug>\S+)/update$', views.EventUpdate.as_view(), name='update'),
     url(r'^(?P<slug>\S+)$', views.EventDetail.as_view(), name='detail'),
