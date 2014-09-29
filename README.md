@@ -1,5 +1,7 @@
 # dikultur
 
+[![Stories in Ready](https://badge.waffle.io/datalogisk-fagraad/dikultur.svg?label=ready&title=Ready)](http://waffle.io/datalogisk-fagraad/dikultur) 
+
 "Portal" for gathering study resources, events and other stuff at DIKU.
 
 ## Requirements
