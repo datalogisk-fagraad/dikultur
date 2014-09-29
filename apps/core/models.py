@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import models as auth_models
 
 
-class GroupDetail(models.Model):
+class GroupDetails(models.Model):
     group = models.OneToOneField(auth_models.Group)
     description = models.TextField()
     url = models.URLField(null=True, blank=True)
