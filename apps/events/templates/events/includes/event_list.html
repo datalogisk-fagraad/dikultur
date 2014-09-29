@@ -1,3 +1,5 @@
+{% if events %}
+
 <table class="table table-striped table-hover">
 
   <thead>
@@ -41,3 +43,9 @@
   </tbody>
 
 </table>
+
+{% else %}
+
+  There are no events!
+
+{% endif %}

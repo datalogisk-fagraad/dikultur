@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
     View
 
+from django.utils import timezone
+
 import icalendar
 
 from . import models, forms
@@ -10,7 +12,14 @@ from . import models, forms
 class EventList(ListView):
     template_name = 'events/event_list.html'
     context_object_name = 'events'
-    queryset = models.Event.objects.filter(public=True)
+    queryset = models.Event.objects.filter(
+        public=True, datetime__gt=timezone.now()).order_by('datetime')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['past_events'] = models.Event.objects.filter(
+            public=True, datetime__lt=timezone.now()).order_by('datetime')
+        return context
 
 
 class EventDetail(DetailView):
