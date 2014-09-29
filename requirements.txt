@@ -9,3 +9,4 @@ CommonMark==0.5.3
 django-extensions==1.3.11
 #django-taggit==0.12.1
 git+https://github.com/alex/django-taggit@develop#egg=taggit
+icalendar==3.8.3
