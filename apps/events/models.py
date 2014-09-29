@@ -40,10 +40,16 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
+
+        # We need the slug to create description for the iCal generation
+        if not self.slug:
+            super().save(*args, **kwargs)
+
         event = icalendar.Event()
         event.add('dtstart', self.datetime)
         event.add('summary', self.title)
         event.add('description', self.get_absolute_url())
         self.ical = event.to_ical()
-        super().save(**kwargs)
+
+        super().save(*args, **kwargs)
