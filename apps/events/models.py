@@ -3,8 +3,6 @@ from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django_extensions.db.fields import AutoSlugField
 
-from django.utils.timezone import tzinfo
-
 import icalendar
 
 from taggit.managers import TaggableManager
@@ -49,7 +47,7 @@ class Event(models.Model):
             super().save(*args, **kwargs)
 
         event = icalendar.Event()
-        event.add('dtstart', self.datetime.astimezone(tzinfo))
+        event.add('dtstart', self.datetime)
         event.add('summary', self.title)
         event.add('description', self.get_absolute_url())
         self.ical = event.to_ical()
