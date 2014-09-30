@@ -14,8 +14,6 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 AUTH_USER_MODEL = 'core.User'
 
-SITE_ID = 1
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
