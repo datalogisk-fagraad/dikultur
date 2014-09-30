@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.facebook',
 
     'crispy_forms',
     'sekizai',
@@ -69,6 +70,8 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+SITE_ID = 1
+
 ROOT_URLCONF = 'dikultur.urls'
 
 WSGI_APPLICATION = 'dikultur.wsgi.application'
@@ -83,7 +86,7 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 LANGUAGE_CODE = env('LANGUAGE_CODE')
-TIME_ZONE = env('TIME_ZONE')
+#TIME_ZONE = env('TIME_ZONE')
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
