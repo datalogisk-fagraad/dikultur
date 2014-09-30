@@ -43,9 +43,14 @@
             Login with:
           </p>
           <li>
-          <a href="{% provider_login_url 'github'%}">
-            <i class="fa fa-github" style="font-size: 18px"></i> Github
-          </a>
+            <a href="{% provider_login_url 'github'%}">
+              <i class="fa fa-github" style="font-size: 18px"></i> GH
+            </a>
+          </li>
+          <li>
+            <a href="{% provider_login_url 'facebook'%}">
+              <i class="fa fa-facebook" style="font-size 18px"></i> FB
+            </a>
           </li>
         {% endif %}
       </ul>
