@@ -16,11 +16,11 @@
   {% crispy form %}
 
 {% addtoblock 'css' %}
-  <link rel="stylesheet" href="{% static 'css/../../../core/static/css/bootstrap-datetimepicker.min.css' %}"
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datetimepicker.min.css' %}"
 {% endaddtoblock %}
 
 {% addtoblock 'js' %}
-  <script src="{% static 'js/../../../core/static/js/bootstrap-datetimepicker.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
   <script>
     $('#id_datetime').datetimepicker(
       {format: 'yyyy-mm-dd hh:ii'}

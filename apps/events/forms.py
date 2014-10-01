@@ -27,10 +27,11 @@ class EventForm(forms.ModelForm):
         ]
 
         if user:
-            self.fields['group'] = forms.ModelChoiceField(
-                queryset=user.group_set.all(),
-            )
-            field_list.append('group')
+            if len(user.group_set.all()) > 0:
+                self.fields['group'] = forms.ModelChoiceField(
+                    queryset=user.group_set.all(),
+                )
+                field_list.append('group')
 
         field_list.append('public')
 
