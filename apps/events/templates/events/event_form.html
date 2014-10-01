@@ -20,10 +20,14 @@
 {% endaddtoblock %}
 
 {% addtoblock 'js' %}
+  <script src="{% static 'js/moment-with-locales.js' %}"></script>
   <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
   <script>
     $('#id_datetime').datetimepicker(
-      {format: 'yyyy-mm-dd hh:ii'}
+      {
+        format: 'YYYY/MM/DD HH:mm',
+        minuteStepping: 15
+      }
     );
   </script>
 {% endaddtoblock %}
