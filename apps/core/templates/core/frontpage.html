@@ -2,7 +2,7 @@
 
 {% block base_content %}
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-9">
 
       <h2>Welcome to dikultur!</h2>
 
@@ -16,6 +16,20 @@
           https://github.com/datalogisk-fagraad/dikultur
         </a>
       </p>
+    </div>
+    <div class="col-md-3">
+      <h5>Upcoming events</h5>
+
+      <ul class="list-unstyled">
+        {% for event in events %}
+          <li>
+            <a href="{% url 'events:detail' event.slug %}">
+              {{ event }}
+            </a> <small style="color: #999">{{ event.datetime|date:'Y-m-d' }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+
     </div>
   </div>
 
