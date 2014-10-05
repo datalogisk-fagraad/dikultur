@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.utils import timezone
 
 from django.views.generic import TemplateView
 
@@ -13,7 +13,7 @@ class FrontPage(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['events'] = Event.objects.filter(
-            public=True).order_by('datetime')[:5]
+            public=True, datetime__gt=timezone.now()).order_by('datetime')[:5]
         return context
 
 

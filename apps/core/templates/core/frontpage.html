@@ -27,6 +27,8 @@
               {{ event }}
             </a> <small style="color: #999">{{ event.datetime|date:'Y-m-d' }}</small>
           </li>
+          {% empty %}
+          There are no events!
         {% endfor %}
       </ul>
 
