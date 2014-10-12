@@ -2,7 +2,35 @@
 {% load markdown events_tags %}
 
 {% block content %}
-  <h1>{{ group.name }}</h1>
+  <h1>{{ group.name }}
+    {% if user in group.members.all %}
+      <a href="{% url 'groups:update' group.slug %}" class="btn btn-default pull-right">
+        <i class="fa fa-edit"></i> Update
+      </a>
+    {% endif %}
+  </h1>
+
+
+  <div>
+    {% if group.website %}
+      <strong>Website:</strong>
+      <a href="{{ group.website }}">
+        {{ group.website }}
+      </a><br />
+    {% endif %}
+
+    {% if group.email %}
+      <strong>Email:</strong> {{ group.email }}<br />
+    {% endif %}
+
+    {% if group.mailinglist_signup %}
+      <strong>Mailinglist:</strong>
+        <a href="{{ group.mailinglist_signup }}">
+          {{ group.mailinglist_signup }}
+        </a>
+    {% endif %}
+
+  </div>
   <hr />
 
   {{ group.description|markdown }}

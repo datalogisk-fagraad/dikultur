@@ -7,7 +7,10 @@ class Group(models.Model):
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
     description = models.TextField()
+
     website = models.URLField(null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    mailinglist_signup = models.URLField(null=True, blank=True)
 
     members = models.ManyToManyField(
         settings.AUTH_USER_MODEL, through='GroupMembership'
@@ -19,6 +22,10 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('groups:detail', kwargs={'slug': self.slug})
 
 
 class GroupMembership(models.Model):

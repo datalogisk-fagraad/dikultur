@@ -1,0 +1,18 @@
+{% extends 'groups/base.html' %}
+{% load staticfiles sekizai_tags crispy_forms_tags %}
+
+{% block content %}
+
+  <a href="
+  {% if group %}
+  {% url 'groups:detail' group.slug %}
+  {% else %}
+  {% url 'groups:list' %}
+  {% endif %}
+  " class="btn btn-default">Back</a>
+
+  <hr />
+
+  {% crispy form %}
+
+{% endblock %}
