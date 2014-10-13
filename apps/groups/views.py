@@ -13,7 +13,7 @@ from ..events.utils import generate_ical
 class GroupList(ListView):
     template_name = 'groups/group_list.html'
     context_object_name = 'groups'
-    queryset = models.Group.objects.all()
+    queryset = models.Group.objects.all().order_by('name')
 
 
 class GroupDetail(DetailView):
