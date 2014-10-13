@@ -2,12 +2,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, View, UpdateView, \
     CreateView
+from django.core.urlresolvers import reverse
 
 from . import models, forms
+from apps.core.models import User
 from ..core.views.mixins import LoginRequiredMixin
 
 from ..events.models import Event
 from ..events.utils import generate_ical
+
+
+class GroupAdminRequiredMixin(LoginRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not hasattr(self, 'obj'):
+            self.obj = models.Group.objects.get(slug=kwargs.get('slug'))
+
+        if request.user not in self.obj.admins:
+            return HttpResponseRedirect(self.obj.get_absolute_url())
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class GroupList(ListView):
@@ -42,22 +55,16 @@ class GroupCreate(LoginRequiredMixin, CreateView):
         return kwargs
 
 
-class GroupUpdate(LoginRequiredMixin, UpdateView):
+class GroupUpdate(GroupAdminRequiredMixin, UpdateView):
     template_name = 'groups/group_form.html'
     model = models.Group
     form_class = forms.GroupForm
-
-    def dispatch(self, request, *args, **kwargs):
-        # Make sure non-admins can not edit a group
-        obj = self.get_object()
-        if request.user not in self.obj.admins:
-            return HttpResponseRedirect(self.obj.get_absolute_url())
-        return super().dispatch(request, *args, **kwargs)
 
 
 class GroupMembers(LoginRequiredMixin, DetailView):
     template_name = 'groups/group_members.html'
     model = models.Group
+
 
 class GroupJoin(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
@@ -65,6 +72,30 @@ class GroupJoin(LoginRequiredMixin, View):
         group = models.Group.objects.get(slug=kwargs.get('slug'))
         models.GroupMembership.objects.create(user=user, group=group)
         return HttpResponseRedirect(group.get_absolute_url())
+
+
+class GroupMakeAdmin(GroupAdminRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        user = User.objects.get(pk=kwargs.get('user_id'))
+        membership = models.GroupMembership.objects.get(
+            user=user, group=self.obj)
+        membership.is_admin = True
+        membership.save()
+        return HttpResponseRedirect(
+            reverse('groups:members', kwargs={'slug': self.obj.slug})
+        )
+
+
+class GroupRemoveAdmin(GroupAdminRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        user = User.objects.get(pk=kwargs.get('user_id'))
+        membership = models.GroupMembership.objects.get(
+            user=user, group=self.obj)
+        membership.is_admin = False
+        membership.save()
+        return HttpResponseRedirect(
+            reverse('groups:members', kwargs={'slug': self.obj.slug})
+        )
 
 
 class GroupICal(View):
