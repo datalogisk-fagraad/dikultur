@@ -14,6 +14,8 @@ class Group(TimestampedModel):
     email = models.EmailField(null=True, blank=True)
     mailinglist_signup = models.URLField(null=True, blank=True)
 
+    is_open = models.BooleanField(default=True)
+
     members = models.ManyToManyField(
         settings.AUTH_USER_MODEL, through='GroupMembership'
     )

@@ -7,11 +7,13 @@
     <div class="btn-group pull-right">
     {% if user.is_authenticated %}
       {% if user not in group.members.all %}
-        <a href="" class="btn btn-default">
-          <i class="fa fa-smile-o"></i> Join
-        </a>
+        {% if group.is_open %}
+          <a href="" class="btn btn-default">
+            <i class="fa fa-smile-o"></i> Join
+          </a>
+        {% endif %}
       {% else %}
-        <span class="btn btn-default">
+        <span class="btn btn-info disabled">
           <i class="fa fa-smile-o"></i> Member
         </span>
       {% endif %}
