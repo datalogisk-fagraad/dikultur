@@ -4,8 +4,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
 
 from django.utils import timezone
 
-import icalendar
-
 from . import models, forms
 from apps.events.utils import generate_ical
 
@@ -57,7 +55,5 @@ class EventUpdate(UpdateView):
 
 class CalendarFeed(View):
     def get(self, *args):
-
         cal = generate_ical()
-
         return HttpResponse(content=cal.to_ical())

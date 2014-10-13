@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic import TemplateView
 from apps.core.views import FrontPage, ProfileView, Logout
 
 urlpatterns = patterns(
