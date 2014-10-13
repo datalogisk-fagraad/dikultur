@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, View, UpdateView, \
     CreateView
@@ -51,6 +51,13 @@ class GroupUpdate(LoginRequiredMixin, UpdateView):
 class GroupMembers(LoginRequiredMixin, DetailView):
     template_name = 'groups/group_members.html'
     model = models.Group
+
+class GroupJoin(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        user = self.request.user
+        group = models.Group.objects.get(slug=kwargs.get('slug'))
+        models.GroupMembership.objects.create(user=user, group=group)
+        return HttpResponseRedirect(group.get_absolute_url())
 
 
 class GroupICal(View):

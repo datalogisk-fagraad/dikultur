@@ -8,7 +8,7 @@
     {% if user.is_authenticated %}
       {% if user not in group.members.all %}
         {% if group.is_open %}
-          <a href="" class="btn btn-default">
+          <a href="{% url 'groups:join' group.slug %}" class="btn btn-default">
             <i class="fa fa-smile-o"></i> Join
           </a>
         {% endif %}
@@ -29,7 +29,6 @@
     {% endif %}
     </div>
   </h1>
-
 
   <div>
     {% if group.website %}
