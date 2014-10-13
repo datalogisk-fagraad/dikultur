@@ -47,6 +47,13 @@ class GroupUpdate(LoginRequiredMixin, UpdateView):
     model = models.Group
     form_class = forms.GroupForm
 
+    def dispatch(self, request, *args, **kwargs):
+        # Make sure non-admins can not edit a group
+        obj = self.get_object()
+        if request.user not in self.obj.admins:
+            return HttpResponseRedirect(self.obj.get_absolute_url())
+        return super().dispatch(request, *args, **kwargs)
+
 
 class GroupMembers(LoginRequiredMixin, DetailView):
     template_name = 'groups/group_members.html'
