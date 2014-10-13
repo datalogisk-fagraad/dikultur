@@ -3,9 +3,10 @@ from django.conf import settings
 from django_extensions.db.fields import AutoSlugField
 
 from taggit.managers import TaggableManager
+from apps.core.models import TimestampedModel
 
 
-class Resource(models.Model):
+class Resource(TimestampedModel):
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='title')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -46,7 +47,7 @@ class Resource(models.Model):
         return self.resourceupvote_set.count()
 
 
-class ResourceUpvote(models.Model):
+class ResourceUpvote(TimestampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     resource = models.ForeignKey('Resource')
 
@@ -54,7 +55,7 @@ class ResourceUpvote(models.Model):
         unique_together = ('user', 'resource')
 
 
-class ResourceFile(models.Model):
+class ResourceFile(TimestampedModel):
     resource = models.ForeignKey('Resource', related_name='files')
     file = models.FileField(upload_to='resources')
 
@@ -67,7 +68,7 @@ class ResourceFile(models.Model):
         return self.file.name.split('/')[-1]
 
 
-class ResourceLink(models.Model):
+class ResourceLink(TimestampedModel):
     resource = models.ForeignKey('Resource', related_name='links')
     title = models.CharField(max_length=255)
     url = models.URLField()

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django_extensions.db.fields import AutoSlugField
+from apps.core.models import TimestampedModel
 
 from apps.groups.models import Group
 
@@ -10,10 +11,7 @@ import icalendar
 from taggit.managers import TaggableManager
 
 
-class Event(models.Model):
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class Event(TimestampedModel):
 
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='title')
