@@ -22,6 +22,9 @@
         <th>
           Joined
         </th>
+        <th>
+          Is admin?
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -32,6 +35,13 @@
         </td>
         <td>
           {{ membership.created_at|date:'DATETIME_FORMAT' }}
+        </td>
+        <td>
+          {% if membership.is_admin %}
+            <i class="fa fa-check"></i>
+          {% else %}
+            <i class="fa fa-times"></i>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}
