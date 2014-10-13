@@ -2,8 +2,10 @@ from django.db import models
 from django.conf import settings
 from django_extensions.db.fields import AutoSlugField
 
+from ..core.models import TimestampedModel
 
-class Group(models.Model):
+
+class Group(TimestampedModel):
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='name')
     description = models.TextField()
@@ -27,8 +29,12 @@ class Group(models.Model):
         from django.core.urlresolvers import reverse
         return reverse('groups:detail', kwargs={'slug': self.slug})
 
+    @property
+    def admins(self):
+        return self.members.filter(memberships__is_admin=True)
 
-class GroupMembership(models.Model):
+
+class GroupMembership(TimestampedModel):
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -38,6 +44,10 @@ class GroupMembership(models.Model):
     group = models.ForeignKey(
         'Group',
         related_name='memberships'
+    )
+
+    is_admin = models.BooleanField(
+        default=False
     )
 
     class Meta:

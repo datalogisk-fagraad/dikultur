@@ -44,7 +44,8 @@ class GroupForm(forms.ModelForm):
         if created:
             models.GroupMembership.objects.create(
                 group=instance,
-                user=self.user
+                user=self.user,
+                is_admin=True,
             )
 
         return instance

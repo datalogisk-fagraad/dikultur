@@ -1,4 +1,4 @@
-from django.db import models
+from .abstract import *
 from django.contrib.auth import models as auth_models
 
 

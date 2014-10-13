@@ -3,11 +3,29 @@
 
 {% block content %}
   <h1>{{ group.name }}
-    {% if user in group.members.all %}
-      <a href="{% url 'groups:update' group.slug %}" class="btn btn-default pull-right">
-        <i class="fa fa-edit"></i> Update
-      </a>
+
+    <div class="btn-group pull-right">
+    {% if user.is_authenticated %}
+      {% if user not in group.members.all %}
+        <a href="" class="btn btn-default">
+          <i class="fa fa-smile-o"></i> Join
+        </a>
+      {% else %}
+        <span class="btn btn-default">
+          <i class="fa fa-smile-o"></i> Member
+        </span>
+      {% endif %}
     {% endif %}
+
+    {% if user in group.admins %}
+        <a href="{% url 'groups:update' group.slug %}" class="btn btn-default">
+          <i class="fa fa-edit"></i> Update
+        </a>
+        <a href="{% url 'groups:members' group.slug %}" class="btn btn-default">
+          <i class="fa fa-users"></i> Members
+        </a>
+    {% endif %}
+    </div>
   </h1>
 
 

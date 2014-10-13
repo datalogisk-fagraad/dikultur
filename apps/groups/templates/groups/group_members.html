@@ -1,0 +1,41 @@
+{% extends 'groups/base.html' %}
+{% load staticfiles sekizai_tags crispy_forms_tags %}
+
+{% block content %}
+
+  <a href="
+  {% if group %}
+    {% url 'groups:detail' group.slug %}
+  {% else %}
+   {% url 'groups:list' %}
+  {% endif %}
+  " class="btn btn-default">Back</a>
+
+  <hr />
+
+  <table class="table table-bordered table-responsive">
+    <thead>
+      <tr>
+        <th>
+          Username
+        </th>
+        <th>
+          Joined
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for membership in group.memberships.all %}
+      <tr>
+        <td>
+          {{ membership.user }}
+        </td>
+        <td>
+          {{ membership.created_at|date:'DATETIME_FORMAT' }}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

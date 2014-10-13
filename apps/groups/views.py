@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, View, UpdateView, \
     CreateView
@@ -46,6 +46,11 @@ class GroupUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'groups/group_form.html'
     model = models.Group
     form_class = forms.GroupForm
+
+
+class GroupMembers(LoginRequiredMixin, DetailView):
+    template_name = 'groups/group_members.html'
+    model = models.Group
 
 
 class GroupICal(View):
