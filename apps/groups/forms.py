@@ -25,7 +25,12 @@ class GroupForm(forms.ModelForm):
         self.helper.form_method = 'POST'
 
         field_list = [
-            'name', 'description', 'website', 'email', 'mailinglist_signup',
+            'name',
+            'description',
+            'website',
+            'email',
+            'mailinglist_signup',
+            'is_open',
             Div(
                 StrictButton('Save', type='submit', css_class='btn-primary'),
                 css_class="text-right"
