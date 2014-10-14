@@ -17,7 +17,10 @@ class Event(TimestampedModel):
     slug = AutoSlugField(populate_from='title')
 
     place = models.CharField(max_length=255)
-    datetime = models.DateTimeField()
+
+    start = models.DateTimeField()
+    end = models.DateTimeField(null=True, blank=True)
+
     description = models.TextField()
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -47,7 +50,12 @@ class Event(TimestampedModel):
             super().save(*args, **kwargs)
 
         event = icalendar.Event()
-        event.add('dtstart', self.datetime)
+
+        event.add('dtstart', self.start)
+
+        if self.end:
+            event.add('dtend', self.end)
+
         event.add('summary', self.title)
         event.add('description', self.get_absolute_url())
         self.ical = event.to_ical()

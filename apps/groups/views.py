@@ -39,7 +39,7 @@ class GroupDetail(DetailView):
         context['future_events'] = Event.objects.filter(
             group=self.object,
             public=True,
-            datetime__gt=timezone.now()
+            start__gt=timezone.now()
         )
         return context
 

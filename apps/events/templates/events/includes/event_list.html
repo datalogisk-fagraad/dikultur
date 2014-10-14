@@ -24,7 +24,10 @@
         {{ event.place }}
       </td>
       <td>
-        {{ event.datetime }}
+        {{ event.start }}
+        {% if event.end %}
+          <i class="fa fa-long-arrow-right"></i> {{ event.end }}
+        {% endif %}
       </td>
 
       {% if profile_view %}

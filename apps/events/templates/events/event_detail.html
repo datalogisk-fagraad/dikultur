@@ -40,11 +40,14 @@
 
       <div class="panel panel-primary">
         <div class="panel-heading">
-          Date:
+          When:
         </div>
 
         <div class="panel-body">
-          {{ event.datetime|date:'DATETIME_FORMAT' }}
+          {{ event.start|date:'SHORT_DATETIME_FORMAT' }}
+          {% if event.end %}
+            <i class="fa fa-long-arrow-right"></i> {{ event.end|date:'SHORT_DATETIME_FORMAT' }}
+          {% endif %}
         </div>
       </div>
 

@@ -23,13 +23,14 @@ class EventForm(forms.ModelForm):
         self.helper.form_method = 'POST'
 
         field_list = [
-            'title', 'place', 'datetime', 'description', 'tags',
+            'title', 'place', 'start', 'end', 'description', 'tags',
         ]
 
         if user:
             if len(user.group_set.all()) > 0:
                 self.fields['group'] = forms.ModelChoiceField(
                     queryset=user.group_set.all(),
+                    required=False,
                 )
                 field_list.append('group')
 
@@ -45,3 +46,12 @@ class EventForm(forms.ModelForm):
         self.helper.layout = Layout(
             *field_list
         )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start = cleaned_data.get('start')
+        end = cleaned_data.get('end')
+
+        if end and end < start:
+            self.add_error('start', 'Start cannot be after end.')
+            self.add_error('end', 'End cannot be before start.')

@@ -23,7 +23,12 @@
   <script src="{% static 'js/moment-with-locales.js' %}"></script>
   <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
   <script>
-    $('#id_datetime').datetimepicker(
+    $('#id_start').datetimepicker(
+      {
+        format: 'YYYY-MM-DD HH:mm'
+      }
+    );
+    $('#id_end').datetimepicker(
       {
         format: 'YYYY-MM-DD HH:mm'
       }
