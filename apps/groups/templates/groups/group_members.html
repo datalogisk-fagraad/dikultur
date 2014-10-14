@@ -39,8 +39,12 @@
         <td>
           {% if membership.is_admin %}
             <i class="fa fa-check"></i>
-            <a class="btn btn-default btn-sm"
-               href="{% url 'groups:remove-admin' group.slug membership.user.id %}">Remove admin</a>
+            {% if membership.user != user %}
+              <a class="btn btn-default btn-sm"
+                 href="{% url 'groups:remove-admin' group.slug membership.user.id %}">
+                Remove admin
+              </a>
+            {% endif %}
           {% else %}
             <i class="fa fa-times"></i>
             <a class="btn btn-default btn-sm"
