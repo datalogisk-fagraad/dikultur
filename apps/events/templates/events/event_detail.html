@@ -65,7 +65,7 @@
         </div>
       {% endif %}
 
-      {% if user.is_authenticated and event.owner == user %}
+      {% if user.is_authenticated and event.owner == user or user in event.group.admins %}
         <div class="panel panel-danger">
           <div class="panel-heading">
             Actions
