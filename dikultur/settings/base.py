@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'apps.core',
     'apps.resources',
     'apps.events',
+    'apps.blogs',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
