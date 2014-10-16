@@ -26,6 +26,11 @@ urlpatterns = patterns(
                              namespace='groups',
                              app_name='groups')),
 
+    url(r'^blogs/', include('apps.blogs.urls',
+                             namespace='blogs',
+                             app_name='blogs')),
+
+
     url(r'^$', FrontPage.as_view(), name='frontpage'),
 )
 
