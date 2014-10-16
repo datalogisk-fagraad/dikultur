@@ -1,0 +1,36 @@
+{% if posts %}
+
+<table class="table table-striped table-hover">
+
+  <thead>
+  <tr>
+    <th>Titel</th>
+    <th>Blog</th>
+    <th>Skrevet</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  {% for post in posts %}
+    <tr>
+      <td>
+        <a href="{% url 'post:detail' post.slug %}">{{ post.title }}</a>
+      </td>
+      <td>
+        {{ post.blog }}
+      </td>
+      <td>
+        {{ event.created_at }}
+      </td>
+
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+{% else %}
+
+    Der er ingen blogindlæg.
+
+{% endif %}
