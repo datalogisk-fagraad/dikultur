@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from apps.core.views import FrontPage, ProfileView, Logout
+from apps.core.views import FrontPage, ProfileView, Logout, Login
 
 urlpatterns = patterns(
     '',
@@ -10,6 +10,7 @@ urlpatterns = patterns(
     url(r'^accounts/profile/$', ProfileView.as_view(), name='profile'),
 
     url(r'^accounts/logout/$', Logout.as_view(), name='account_logout'),
+    url(r'^accounts/login/$', Login.as_view(), name='account_login'),
 
     url(r'^accounts/', include('allauth.urls')),
 

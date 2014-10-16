@@ -2,7 +2,7 @@ from django.utils import timezone
 
 from django.views.generic import TemplateView
 
-from allauth.account.views import LogoutView
+from allauth.account.views import LogoutView, LoginView
 
 from ...events.models import Event
 
@@ -23,3 +23,6 @@ class ProfileView(TemplateView):
 
 class Logout(LogoutView):
     template_name = 'core/logout.html'
+
+class Login(LoginView):
+    template_name = 'core/login.html'

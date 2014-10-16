@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
 from django.utils import timezone
 
 from . import models, forms
+from apps.core.views.mixins import LoginRequiredMixin
 from apps.events.utils import generate_ical
 
 
@@ -27,7 +28,7 @@ class EventDetail(DetailView):
     model = models.Event
 
 
-class EventCreate(CreateView):
+class EventCreate(LoginRequiredMixin, CreateView):
     template_name = 'events/event_form.html'
     model = models.Event
     form_class = forms.EventForm
@@ -42,7 +43,7 @@ class EventCreate(CreateView):
         return kwargs
 
 
-class EventUpdate(UpdateView):
+class EventUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'events/event_form.html'
     model = models.Event
     form_class = forms.EventForm
