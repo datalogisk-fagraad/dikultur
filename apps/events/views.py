@@ -42,11 +42,21 @@ class EventCreate(LoginRequiredMixin, CreateView):
         kwargs['user'] = self.request.user
         return kwargs
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['action'] = 'new'
+        return context
+
 
 class EventUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'events/event_form.html'
     model = models.Event
     form_class = forms.EventForm
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['action'] = 'update'
+        return context
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

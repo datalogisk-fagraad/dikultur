@@ -4,9 +4,7 @@
 
 {% block content %}
 
-  {% if user.is_authenticated %}
-    <a href="{% url 'events:create' %}" class="btn btn-primary">New event</a>
-  {% endif %}
+  <a href="{% url 'events:create' %}" class="btn btn-primary">New event</a>
 
   <h2>Future events:</h2>
   {% event_list events %}

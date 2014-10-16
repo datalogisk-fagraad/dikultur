@@ -3,17 +3,34 @@
 
 {% block content %}
 
-  <a href="
-  {% if event %}
-  {% url 'events:detail' event.slug %}
-  {% else %}
-  {% url 'events:list' %}
-  {% endif %}
-  " class="btn btn-default">Back</a>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <a href="
+        {% if event %}
+        {% url 'events:detail' event.slug %}
+        {% else %}
+        {% url 'events:list' %}
+        {% endif %}
+        " class="btn btn-default pull-right">
+          <i class="fa fa-arrow-circle-left"></i> Back
+        </a>
+         <h2>
+           {% if action == 'new' %}
+              Create new event
+           {% else %}
+              Update event: "{{ event.title }}"
+           {% endif %}
+         </h2>
+      </div>
+    </div>
+  </div>
 
-  <hr />
-
-  {% crispy form %}
+  <div class="row">
+    <div class="col-md-12">
+      {% crispy form %}
+    </div>
+  </div>
 
 {% addtoblock 'css' %}
   <link rel="stylesheet" href="{% static 'css/bootstrap-datetimepicker.min.css' %}"
