@@ -11,10 +11,12 @@ class BlogList(ListView):
     template_name = 'blogs/blog_list.html'
     queryset = models.Blog.objects.order_by('title')
 
+
 class BlogDetail(DetailView):
     template_name = 'blogs/blog_detail.html'
     context_object_name = 'blog'
     model = models.Blog
+
 
 class PostCreate(CreateView):
     template_name = 'blogs/post_form.html'
@@ -29,7 +31,7 @@ class PostCreate(CreateView):
     def get(self, request, *args, **kwargs):
         user = self.request.user
         if not user in self.blog.owners.all():
-            return HttpReponse('Access denied')
+            return HttpResponse('Access denied')
         return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -41,8 +43,21 @@ class PostCreate(CreateView):
         kwargs['blog'] = self.blog
         return kwargs
 
-class PostList(ListView):
-    template_name = 'blogs/post_list.html'
+
+class PostDetail(DetailView):
+    template_name = 'blogs/post_detail.html'
+    context_object_name = 'post'
+    model = models.Post
+
+
+class PostUpdate(UpdateView):
+    template_name = 'blogs/post_form.html'
+    model = models.Post
+    form_class = forms.PostForm
+
+
+class BlogIndex(ListView):
+    template_name = 'blogs/blog_index.html'
     context_object_name = 'posts'
 
     def dispatch(self, request, *args, **kwargs):
@@ -50,10 +65,5 @@ class PostList(ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self, **kwargs):
-        if self.slug == 'all':
-            queryset = models.Post.objects.filter(
-                public=True).order_by('created_at')
-        else:
-            queryset = models.Post.objects.filter(
-                public=True, blog=self.slug).order_by('created_at')
+        queryset = models.Post.objects.public().order_by('created_at')
         return queryset
