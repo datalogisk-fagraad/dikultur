@@ -3,6 +3,9 @@
 
 {% block content %}
 
-{% crispy form %}
-
+{% if user.is_authenticated and user in post.blog.owners.all %}
+  {% crispy form %}
+{% else %}
+  lol noob
+{% endif %}
 {% endblock %}

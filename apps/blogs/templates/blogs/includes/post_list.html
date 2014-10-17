@@ -14,15 +14,14 @@
   {% for post in posts %}
     <tr>
       <td>
-        <a href="{% url 'post:detail' post.slug %}">{{ post.title }}</a>
+        <a href="{% url 'blogs:post-detail' post.blog.slug post.slug %}">{{ post.title }}</a>
       </td>
       <td>
-        {{ post.blog }}
+        <a href="{% url 'blogs:blog-detail' post.blog %}"> {{ post.blog }} </a>
       </td>
       <td>
-        {{ event.created_at }}
+        {{ post.created_at }}
       </td>
-
     </tr>
   {% endfor %}
 
@@ -30,7 +29,5 @@
 </table>
 
 {% else %}
-
     Der er ingen blogindlæg.
-
 {% endif %}

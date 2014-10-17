@@ -1,7 +1,9 @@
-{% extends 'events/base.html' %}
+{% extends 'blogs/base.html' %}
 
 {% block content %}
 
-{{ blog.title }}
+<h2>{{ blog.title }}</h2>
+<h3>{{ blog.description }}</h3>
+{% include 'blogs/includes/post_list.html' with posts=blog.posts.public %}
 
 {% endblock %}

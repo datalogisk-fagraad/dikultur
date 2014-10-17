@@ -1,0 +1,69 @@
+{% extends 'blogs/base.html' %}
+{% load markdown %}
+
+{% block content %}
+
+  <div class="row-fluid">
+
+    <div class="col-sm-8">
+
+      {% if not post.public %}
+        <p class="alert alert-danger" style="font-size: 18px">
+            <i class="fa fa-exclamation-circle fa-2x" style="vertical-align: middle"></i>
+            This post is not public! Go update the post to make it public.
+        </p>
+      {% endif %}
+
+      <div class="page-header" style="margin-top: 0px">
+        <h1 style="margin-top: 0px">
+          {{ post.title }}
+        </h1>
+      </div>
+
+      <p>{{ post.content|markdown }}</p>
+
+    </div>
+
+    <div class="col-sm-4">
+
+      {% if post.tags.count > 0 %}
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            Tags:
+          </div>
+
+          <div class="panel-body">
+            {% for tag in post.tags.all %}
+              <span class="label label-info">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if user.is_authenticated and user in post.blog.owners.all %}
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            Actions
+          </div>
+
+          <div class="panel-body">
+            <p>This is your post.</p>
+
+            <p>
+              <strong>Status:</strong>
+              {% if post.public %}
+                Public
+              {% else %}
+                Not public
+              {% endif %}
+            </p>
+
+            <a href="{% url 'blogs:post-update' post.blog.slug post.slug %}" class="btn btn-primary">Update</a>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+{% endblock %}
