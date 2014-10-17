@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django_extensions.db.fields import AutoSlugField
 
+from taggit.managers import TaggableManager
+
 
 class Blog(models.Model):
     title = models.CharField(max_length=255)
@@ -29,6 +31,8 @@ class Post(models.Model):
     content = models.TextField()
 
     blog = models.ForeignKey('Blog', related_name='posts')
+
+    tags = TaggableManager(blank=True)
 
     public = models.BooleanField(default=False)
 
