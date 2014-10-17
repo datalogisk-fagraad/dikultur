@@ -3,13 +3,21 @@ from django.conf import settings
 from django_extensions.db.fields import AutoSlugField
 
 
-# Create your models here.
 class Blog(models.Model):
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='title')
 
     description = models.TextField(null=True, blank=True)
     owners = models.ManyToManyField(settings.AUTH_USER_MODEL)
+
+    def __str__(self):
+        return self.title
+
+
+class PostQuerySet(models.QuerySet):
+    def public(self):
+        return self.filter(public=True)
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -20,9 +28,11 @@ class Post(models.Model):
 
     content = models.TextField()
 
-    blog = models.ForeignKey('Blog')
+    blog = models.ForeignKey('Blog', related_name='posts')
 
     public = models.BooleanField(default=False)
+
+    objects = PostQuerySet.as_manager()
 
     class Meta:
         verbose_name = 'post'
@@ -30,7 +40,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('blogs:list')
+        return reverse('blogs:post-detail', kwargs={'blog_slug':self.blog.slug, 'slug': self.slug})
 
     def __str__(self):
         return self.title
