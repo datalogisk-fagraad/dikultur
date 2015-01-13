@@ -10,7 +10,7 @@ get_path = lambda x: os.path.join(BASE_DIR, x)
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
 
 AUTH_USER_MODEL = 'core.User'
 
