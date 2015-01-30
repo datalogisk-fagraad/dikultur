@@ -1,7 +1,15 @@
 {% extends 'blogs/base.html' %}
 
 {% block content %}
-    <h2>All posts</h2>
-    {% include 'blogs/includes/post_list.html' %}
+
+<h2>New blogposts</h2>
+{% if user.is_authenticated %}
+Your blogs:
+    {% for blog in user.blog_set.all %}
+    <a href="{% url 'blogs:blog-detail' blog %}">{{ blog }}</a>
+    {% endfor %}
+{% endif %}
+
+{% include 'blogs/includes/post_list.html' %}
 
 {% endblock %}
