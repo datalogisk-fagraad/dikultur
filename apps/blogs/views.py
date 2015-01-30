@@ -49,6 +49,16 @@ class PostDetail(DetailView):
     context_object_name = 'post'
     model = models.Post
 
+    def dispatch(self, request, *args, **kwargs):
+        slug = kwargs.get('blog_slug', None)
+        self.blog = models.Blog.objects.get(slug=slug)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        if not user in self.blog.owners.all():
+            return HttpResponse('Access denied')
+        return super().get(request, *args, **kwargs)
 
 class PostUpdate(UpdateView):
     template_name = 'blogs/post_form.html'
