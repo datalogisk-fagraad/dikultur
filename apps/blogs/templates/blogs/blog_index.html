@@ -4,10 +4,12 @@
 
 <h2>New blogposts</h2>
 {% if user.is_authenticated %}
-Your blogs:
+  {% if user.blog_set.all.exists %}
+    Your blogs:
     {% for blog in user.blog_set.all %}
     <a href="{% url 'blogs:blog-detail' blog %}">{{ blog }}</a>
     {% endfor %}
+  {% endif %}
 {% endif %}
 
 {% include 'blogs/includes/post_list.html' %}
