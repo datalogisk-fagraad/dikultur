@@ -7,8 +7,9 @@
 
 {% if user.is_authenticated and user in blog.owners.all %}
 <h4><a href="{% url 'blogs:post-create' blog.slug %}">Add blogpost</a></h4>
-{% endif %}
 
+{% include 'blogs/includes/post_list.html' with posts=blog.posts.all %}
+{% else %}
 {% include 'blogs/includes/post_list.html' with posts=blog.posts.public %}
-
+{% endif %}
 {% endblock %}

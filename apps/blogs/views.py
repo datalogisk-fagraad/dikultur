@@ -49,6 +49,7 @@ class PostDetail(DetailView):
     context_object_name = 'post'
     model = models.Post
 
+
 class PostUpdate(UpdateView):
     template_name = 'blogs/post_form.html'
     model = models.Post
