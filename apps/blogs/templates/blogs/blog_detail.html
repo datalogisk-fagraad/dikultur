@@ -6,7 +6,7 @@
 <h3>{{ blog.description }}</h3>
 
 {% if user.is_authenticated and user in blog.owners.all %}
-<h4><a href="{% url 'blogs:post-create' blog %}">Add blogpost</a></h4>
+<h4><a href="{% url 'blogs:post-create' blog.slug %}">Add blogpost</a></h4>
 {% endif %}
 
 {% include 'blogs/includes/post_list.html' with posts=blog.posts.public %}
