@@ -7,7 +7,7 @@
   {% if user.blog_set.all.exists %}
     Your blogs:
     {% for blog in user.blog_set.all %}
-    <a href="{% url 'blogs:blog-detail' blog %}">{{ blog }}</a>
+    <a href="{% url 'blogs:blog-detail' blog.slug %}">{{ blog }}</a>
     {% endfor %}
   {% endif %}
 {% endif %}
