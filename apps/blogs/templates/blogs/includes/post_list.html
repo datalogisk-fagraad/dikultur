@@ -17,7 +17,7 @@
         <a href="{% url 'blogs:post-detail' post.blog.slug post.slug %}">{{ post.title }}</a>
       </td>
       <td>
-        <a href="{% url 'blogs:blog-detail' post.blog %}"> {{ post.blog }} </a>
+        <a href="{% url 'blogs:blog-detail' post.blog.slug %}"> {{ post.blog }} </a>
       </td>
       <td>
         {{ post.created_at }}
