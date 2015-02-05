@@ -1,11 +1,7 @@
-from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
-    View
-
-from django.utils import timezone
-
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from . import models, forms
+
 
 class BlogList(ListView):
     template_name = 'blogs/blog_list.html'
@@ -30,7 +26,7 @@ class PostCreate(CreateView):
 
     def get(self, request, *args, **kwargs):
         user = self.request.user
-        if not user in self.blog.owners.all():
+        if user not in self.blog.owners.all():
             return HttpResponse('Access denied')
         return super().get(request, *args, **kwargs)
 
@@ -65,6 +61,7 @@ class PostUpdate(UpdateView):
         if not user in self.blog.owners.all():
             return HttpResponse('Access denied')
         return super().get(request, *args, **kwargs)
+
 
 class BlogIndex(ListView):
     template_name = 'blogs/blog_index.html'
