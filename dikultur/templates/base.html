@@ -64,6 +64,35 @@
   {% block base_content %}{% endblock %}
 </div>
 
+{% addtoblock 'css' %}
+  <style>
+    html {
+      position: relative;
+      min-height: 100%;
+    }
+    body {
+      /* Margin bottom by footer height */
+      margin-bottom: 60px;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      /* Set the fixed height of the footer here */
+      height: 60px;
+      background-color: #f5f5f5;
+    }
+  </style>
+{% endaddtoblock %}
+
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">Didn't find what you where looking for? Check
+      <a href="http://ucph.dk">UCPH</a>
+    </p>
+  </div>
+</footer>
+
 <script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 {% render_block 'js' %}
