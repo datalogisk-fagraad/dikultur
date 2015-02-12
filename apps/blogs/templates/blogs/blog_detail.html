@@ -1,15 +1,18 @@
 {% extends 'blogs/base.html' %}
 
 {% block content %}
-
-<h2>{{ blog.title }}</h2>
-<h3>{{ blog.description }}</h3>
-
+<ul class="blog-header">
+  <li><p class="blog-title">{{ blog.title }}</p></li>
 {% if user.is_authenticated and user in blog.owners.all %}
-<h4><a href="{% url 'blogs:post-create' blog.slug %}">Add blogpost</a></h4>
-
+  <li><a href="{% url 'blogs:post-create' blog.slug %}">Add blogpost</a></li>
+{% endif %}
+</ul>
+<hr/>
+<h3>{{ blog.description }}</h3>
+<br>
+{% if user.is_authenticated and user in blog.owners.all %}
 {% include 'blogs/includes/post_list.html' with posts=blog.posts.live %}
 {% else %}
-{% include 'blogs/includes/post_list.html' with posts=blog.posts.public %}
+{% include 'blogs/includes/post_list.html' with posts=blog.posts.objects.public %}
 {% endif %}
 {% endblock %}

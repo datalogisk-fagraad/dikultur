@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Glegoo';
+  src: url('../fonts/Glegoo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Aaargh';
+  src: url('../fonts/Aaargh.ttf') format('truetype');
+    font-weight: normal;
+  font-style: normal;
+}
+
+.blog-header {
+    list-style: none;
+    padding-left: 0;
+}
+
+.blog-header * {
+    display: inline;
+    padding-right: 10px;
+}
+
+.blog-title {
+  font-family: Glegoo;
+  font-size: 20pt;
+}
+
+h3 {
+  font-family: Aaargh;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.navbar-brand {
+  font-family: Glegoo;
+  font-size: 22pt;
+  font-weight: bold;
+  color: white !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+  font-family: Glegoo;
+  font-size: 14pt;
+  color: white !important;
+}
+
+.navbar {
+    background-color: #A3CAFF;
+}
