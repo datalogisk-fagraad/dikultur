@@ -13,6 +13,6 @@
 {% if user.is_authenticated and user in blog.owners.all %}
 {% include 'blogs/includes/post_list.html' with posts=blog.posts.live %}
 {% else %}
-{% include 'blogs/includes/post_list.html' with posts=blog.posts.objects.public %}
+{% include 'blogs/includes/post_list.html' with posts=blog.posts.public %}
 {% endif %}
 {% endblock %}
