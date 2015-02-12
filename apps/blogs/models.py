@@ -1,8 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django_extensions.db.fields import AutoSlugField
-
 from taggit.managers import TaggableManager
+from .managers import PostQuerySet
 
 
 class Blog(models.Model):
@@ -16,12 +16,8 @@ class Blog(models.Model):
         return self.title
 
 
-class PostQuerySet(models.QuerySet):
-    def public(self):
-        return self.filter(public=True)
-
-
 class Post(models.Model):
+    objects = PostQuerySet.as_manager()
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='title')
 
@@ -36,7 +32,7 @@ class Post(models.Model):
 
     public = models.BooleanField(default=False)
 
-    objects = PostQuerySet.as_manager()
+    is_deleted = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'post'
