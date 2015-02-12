@@ -9,6 +9,7 @@
     {% for blog in user.blog_set.all %}
     <a href="{% url 'blogs:blog-detail' blog.slug %}">{{ blog }}</a>
     {% endfor %}
+    <br>
   {% endif %}
 {% endif %}
 

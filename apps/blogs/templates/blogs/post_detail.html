@@ -59,6 +59,7 @@
             </p>
 
             <a href="{% url 'blogs:post-update' post.blog.slug post.slug %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'blogs:post-delete' post.blog.slug post.slug %}" class="btn btn-primary">Delete</a>
           </div>
         </div>
       {% endif %}

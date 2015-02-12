@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
-    View
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, DeleteView
+from django.core.urlresolvers import reverse_lazy
 
 from django.utils import timezone
 
@@ -66,6 +66,20 @@ class PostUpdate(UpdateView):
             return HttpResponse('Access denied')
         return super().get(request, *args, **kwargs)
 
+
+class PostDelete(DeleteView):
+    model = models.Post
+    context_object_name = 'post'
+
+    def delete(self, request, *args, **kwargs):
+        post = self.get_object()
+        post.is_deleted = True
+        post.save()
+        success_url = reverse_lazy(
+            'blogs:blog-detail',
+            kwargs={'slug': post.blog.slug})
+        return HttpResponseRedirect(success_url)
+
 class BlogIndex(ListView):
     template_name = 'blogs/blog_index.html'
     context_object_name = 'posts'
@@ -76,4 +90,5 @@ class BlogIndex(ListView):
 
     def get_queryset(self, **kwargs):
         queryset = models.Post.objects.public().order_by('created_at')
+        print(queryset)
         return queryset
