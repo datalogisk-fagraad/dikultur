@@ -90,6 +90,6 @@ class BlogIndex(ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self, **kwargs):
-        queryset = models.Post.objects.public().order_by('created_at')
+        queryset = models.Post.objects.public().order_by('-created_at')
         print(queryset)
         return queryset
