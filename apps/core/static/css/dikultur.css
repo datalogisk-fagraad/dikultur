@@ -22,15 +22,31 @@
     padding-right: 10px;
 }
 
-.blog-title {
+h1 {
   font-family: Glegoo;
   font-size: 20pt;
 }
 
-h3 {
+h2 {
   font-family: Aaargh;
   font-size: 12pt;
   font-weight: bold;
+}
+
+h3 {
+  font-family: Aaargh;
+  font-size: 11pt;
+  font-weight: bold;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+h4 {
+  font-family: Aaargh;
+  font-size: 9pt;
+  font-weight: bold;
+  margin-bottom: 0px;
+  margin-top: 4px;
 }
 
 .navbar-brand {

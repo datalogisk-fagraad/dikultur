@@ -2,7 +2,7 @@
 
 {% block content %}
 <ul class="blog-header">
-  <li><p class="blog-title">{{ blog.title }}</p></li>
+  <li><h1>{{ blog.title }}<h1></li>
 {% if user.is_authenticated and user in blog.owners.all %}
   <li><a href="{% url 'blogs:post-create' blog.slug %}">Add blogpost</a></li>
 {% endif %}

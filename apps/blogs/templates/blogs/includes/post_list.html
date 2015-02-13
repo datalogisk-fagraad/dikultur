@@ -4,24 +4,24 @@
 
   <thead>
   <tr>
-    <th>Titel</th>
-    <th>Blog</th>
-    <th>Skrevet</th>
+    <th><h3>Titel</h3></th>
+    <th><h3>Blog</h3></th>
+    <th><h3>Skrevet</h3></th>
   </tr>
   </thead>
 
   <tbody>
   {% for post in posts %}
     <tr>
-      <td>
-        <a href="{% url 'blogs:post-detail' post.blog.slug post.slug %}">{{ post.title }}</a>
+      <td><h4>
+        <a href="{% url 'blogs:post-detail' post.blog.slug post.slug %}">{{ post.title }}</a></h4>
       </td>
-      <td>
+      <td><h4>
         <a href="{% url 'blogs:blog-detail' post.blog.slug %}"> {{ post.blog }} </a>
-      </td>
-      <td>
+      </h4></td>
+      <td><h4>
         {{ post.created_at }}
-      </td>
+      </h4></td>
     </tr>
   {% endfor %}
 

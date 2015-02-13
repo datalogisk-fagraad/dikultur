@@ -2,17 +2,18 @@
 
 {% block content %}
 
-<h2>New blogposts</h2>
-{% if user.is_authenticated %}
+<ul class="blog-header">
+  <h1>New blogposts</h1>
+  {% if user.is_authenticated %}
   {% if user.blog_set.all.exists %}
-    Your blogs:
-    {% for blog in user.blog_set.all %}
+  <h4>Your blogs:
+  {% for blog in user.blog_set.all %}
     <a href="{% url 'blogs:blog-detail' blog.slug %}">{{ blog }}</a>
-    {% endfor %}
-    <br>
+  {% endfor %}
+  </h4>
   {% endif %}
+</ul>
+<br>
 {% endif %}
-
 {% include 'blogs/includes/post_list.html' %}
-
 {% endblock %}
