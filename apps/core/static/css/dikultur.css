@@ -12,6 +12,17 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Garogier';
+  src: url('../fonts/Garogier.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+    background-color: #FFFFFE;
+}
+
 .blog-header {
     list-style: none;
     padding-left: 0;
@@ -23,9 +34,20 @@
 }
 
 h1 {
+  color: #59502D;
   font-family: Glegoo;
-  font-size: 20pt;
+  font-size: 26pt;
 }
+
+hr {
+    background-color: #C7C7C7;
+    height: 1px;
+}
+
+p {
+    font-size: 12pt;
+}
+
 
 h2 {
   font-family: Aaargh;
@@ -43,10 +65,24 @@ h3 {
 
 h4 {
   font-family: Aaargh;
-  font-size: 9pt;
+  font-size: 10pt;
   font-weight: bold;
   margin-bottom: 0px;
   margin-top: 4px;
+}
+
+.brand {
+    height: 50px;
+    width: 146px;
+    padding: 0 10px;
+    background-color: #3B96E8 !important;
+    text-shadow: 0.2em 0.2em #177AD1;
+}
+
+.brand:hover {
+    height: 50px;
+    background-color: #3E9EF5 !important;
+  text-shadow: 0.2em 0.2em #177AD1;
 }
 
 .navbar-brand {
@@ -54,14 +90,20 @@ h4 {
   font-size: 22pt;
   font-weight: bold;
   color: white !important;
+
 }
 
 .navbar-default .navbar-nav > li > a {
   font-family: Glegoo;
-  font-size: 14pt;
+  font-size: 16pt;
   color: white !important;
+  text-shadow: 1px 1px #22A4EB;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  text-shadow: 1px 1px #177AD1;
 }
 
 .navbar {
-    background-color: #A3CAFF;
+    background-color: #66BBFF;
 }
