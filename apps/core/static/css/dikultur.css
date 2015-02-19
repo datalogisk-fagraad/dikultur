@@ -1,22 +1,22 @@
 @font-face {
-  font-family: 'Glegoo';
-  src: url('../fonts/Glegoo.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Aaargh';
-  src: url('../fonts/Aaargh.ttf') format('truetype');
+    font-family: 'Glegoo';
+    src: url('../fonts/Glegoo.woff') format('woff');
     font-weight: normal;
-  font-style: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Garogier';
-  src: url('../fonts/Garogier.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Aaargh';
+    src: url('../fonts/Aaargh.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Garogier';
+    src: url('../fonts/Garogier.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
@@ -34,9 +34,9 @@ body {
 }
 
 h1 {
-  color: #59502D;
-  font-family: Glegoo;
-  font-size: 26pt;
+    color: #59502D;
+    font-family: Glegoo;
+    font-size: 26pt;
 }
 
 hr {
@@ -50,25 +50,25 @@ p {
 
 
 h2 {
-  font-family: Aaargh;
-  font-size: 12pt;
-  font-weight: bold;
+    font-family: Aaargh;
+    font-size: 12pt;
+    font-weight: bold;
 }
 
 h3 {
-  font-family: Aaargh;
-  font-size: 11pt;
-  font-weight: bold;
-  margin-bottom: 0px;
-  margin-top: 0px;
+    font-family: Aaargh;
+    font-size: 11pt;
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 h4 {
-  font-family: Aaargh;
-  font-size: 10pt;
-  font-weight: bold;
-  margin-bottom: 0px;
-  margin-top: 4px;
+    font-family: Aaargh;
+    font-size: 10pt;
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 4px;
 }
 
 .brand {
@@ -82,26 +82,33 @@ h4 {
 .brand:hover {
     height: 50px;
     background-color: #3E9EF5 !important;
-  text-shadow: 0.2em 0.2em #177AD1;
+    text-shadow: 0.2em 0.2em #177AD1;
+}
+
+.navbar-text p {
+    color: #FFFFFF;
+}
+
+.navbar {
+    max-height: 51px;
 }
 
 .navbar-brand {
-  font-family: Glegoo;
-  font-size: 22pt;
-  font-weight: bold;
-  color: white !important;
-
+    font-family: Glegoo;
+    font-size: 22pt;
+    font-weight: bold;
+    color: white !important;
 }
 
 .navbar-default .navbar-nav > li > a {
-  font-family: Glegoo;
-  font-size: 16pt;
-  color: white !important;
-  text-shadow: 1px 1px #22A4EB;
+    font-family: Glegoo;
+    font-size: 16pt;
+    color: white !important;
+    text-shadow: 1px 1px #22A4EB;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  text-shadow: 1px 1px #177AD1;
+    text-shadow: 1px 1px #177AD1;
 }
 
 .navbar {
