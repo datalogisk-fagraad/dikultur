@@ -29,6 +29,8 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
 
+    'opbeat.contrib.django',
+
     'crispy_forms',
     'sekizai',
     'taggit',
@@ -55,6 +57,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -103,3 +106,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
+
+OPBEAT = {
+    "ORGANIZATION_ID": env('OPBEAT_ORGANIZATION_ID'),
+    "APP_ID": env('OPBEAT_APP_ID'),
+    "SECRET_TOKEN": env('OPBEAT_SECRET_TOKEN'),
+}
