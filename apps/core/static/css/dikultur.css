@@ -20,7 +20,7 @@
 }
 
 body {
-    background-color: #FFFFFE;
+    background-color: #F2F2F2;
 }
 
 .blog-header {
@@ -40,7 +40,7 @@ h1 {
 }
 
 hr {
-    background-color: #C7C7C7;
+    background-color: #59502D;
     height: 1px;
 }
 
@@ -48,15 +48,20 @@ p {
     font-size: 12pt;
 }
 
+.row {
+    padding: 10px;
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #CCCCCC;
+}
 
 h2 {
-    font-family: Aaargh;
     font-size: 12pt;
     font-weight: bold;
 }
 
 h3 {
-    font-family: Aaargh;
     font-size: 11pt;
     font-weight: bold;
     margin-bottom: 0px;
@@ -64,7 +69,6 @@ h3 {
 }
 
 h4 {
-    font-family: Aaargh;
     font-size: 10pt;
     font-weight: bold;
     margin-bottom: 0px;
@@ -75,17 +79,11 @@ h4 {
     height: 50px;
     width: 146px;
     padding: 0 10px;
-    background-color: #3B96E8 !important;
-    text-shadow: 0.2em 0.2em #177AD1;
+    background-color: #29251F !important;
+
 }
 
-.brand:hover {
-    height: 50px;
-    background-color: #3E9EF5 !important;
-    text-shadow: 0.2em 0.2em #177AD1;
-}
-
-.navbar-text p {
+.navbar-text {
     color: #FFFFFF;
 }
 
@@ -104,13 +102,8 @@ h4 {
     font-family: Glegoo;
     font-size: 16pt;
     color: white !important;
-    text-shadow: 1px 1px #22A4EB;
-}
-
-.navbar-default .navbar-nav > li > a:hover {
-    text-shadow: 1px 1px #177AD1;
 }
 
 .navbar {
-    background-color: #66BBFF;
+    background-color: #363028;
 }
